@@ -5,6 +5,7 @@ import ResponsiveAppBar from "./components/AppBar";
 import HomePage from "./pages/HomePage";
 import AddNewPage from "./pages/AddNewPage";
 import CategoriesPage from "./pages/CategoriesPage";
+import EditNote from "./pages/EditNote";
 
 /*
   Routes:
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/add" element={<AddNewPage />} />
         <Route path="/categories" element={<CategoriesPage />} />
+        <Route path="/edit/1" element={<EditNote />} />
       </Routes>
     </Router>
   );

@@ -8,7 +8,9 @@ import {
   Grid,
   Button,
   Typography,
+  Fab,
 } from "@mui/material";
+import { Link as RouterLink } from "react-router";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -16,6 +18,7 @@ import Select from "@mui/material/Select";
 import { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
 
 function HomePage() {
   const [category, setCategory] = useState("");
@@ -78,10 +81,15 @@ function HomePage() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button color="primary" startIcon={<DeleteIcon />}>
+                <Button
+                  color="primary"
+                  startIcon={<EditIcon />}
+                  component={RouterLink}
+                  to="/edit/1"
+                >
                   Edit
                 </Button>
-                <Button color="error" startIcon={<EditIcon />}>
+                <Button color="error" startIcon={<DeleteIcon />}>
                   Delete
                 </Button>
               </CardActions>
@@ -97,10 +105,15 @@ function HomePage() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button color="primary" startIcon={<DeleteIcon />}>
+                <Button
+                  color="primary"
+                  startIcon={<EditIcon />}
+                  component={RouterLink}
+                  to="/edit/1"
+                >
                   Edit
                 </Button>
-                <Button color="error" startIcon={<EditIcon />}>
+                <Button color="error" startIcon={<DeleteIcon />}>
                   Delete
                 </Button>
               </CardActions>
@@ -116,10 +129,15 @@ function HomePage() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button color="primary" startIcon={<DeleteIcon />}>
+                <Button
+                  color="primary"
+                  startIcon={<EditIcon />}
+                  component={RouterLink}
+                  to="/edit/1"
+                >
                   Edit
                 </Button>
-                <Button color="error" startIcon={<EditIcon />}>
+                <Button color="error" startIcon={<DeleteIcon />}>
                   Delete
                 </Button>
               </CardActions>
@@ -127,6 +145,14 @@ function HomePage() {
           </Grid>
         </Grid>
       </Container>
+      <Fab
+        color="primary"
+        sx={{ position: "fixed", bottom: "15px", right: "15px" }}
+        component={RouterLink}
+        to="/add"
+      >
+        <AddIcon />
+      </Fab>
     </>
   );
 }
