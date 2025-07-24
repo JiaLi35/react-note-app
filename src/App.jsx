@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import AddNewPage from "./pages/AddNewPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import EditNote from "./pages/EditNote";
+import { Toaster } from "sonner";
 
 /*
   Routes:
@@ -24,6 +25,7 @@ function App() {
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/edit/1" element={<EditNote />} />
       </Routes>
+      <Toaster position="bottom-right" />
     </Router>
   );
 }

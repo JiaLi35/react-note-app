@@ -7,14 +7,65 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Editor from "react-simple-wysiwyg";
+import { toast } from "sonner";
+import { nanoid } from "nanoid";
+
+/*
+array for content stuffs
+  [
+    {
+      id : "dkjr91384ndgjnaa", // nanoid
+      title: "New note", 
+      category: "msdfjasd21845" // category id from category 
+      content: ""
+    }
+  ]
+*/
 
 function AddNewPage() {
   /*
     rule for form fields state: one state for one field
   */
+
+  // 1. load the categories data from local storage
+  const dataInLocalStorage = localStorage.getItem("categorieslist");
+  // 2. create a state to store the categories data from local storage
+  const [categories, setCategories] = useState(
+    dataInLocalStorage ? JSON.parse(dataInLocalStorage) : []
+  );
+  // 3. load the notes data from local storage
+  const notesLocalStorage = localStorage.getItem("noteslist");
+  console.log(notesLocalStorage);
+  // 4. create a state to store the notes data from local storage
+  const [notes, setNotes] = useState(
+    notesLocalStorage ? JSON.parse(notesLocalStorage) : []
+  );
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [content, setContent] = useState("Welcome to <b>Forward College</b>");
+
+  const handleAddNew = () => {
+    // 6. check for error - make sure all the fields are filled up
+    if (content === "" || title === "" || category === "") {
+      toast("Please fill up all the fields");
+    } else {
+      // 7. add new note data into the notes state
+      const updatedNotesList = [
+        ...notes,
+        {
+          id: nanoid(),
+          title: title,
+          category: category,
+          content: content,
+        },
+      ];
+      setNotes(updatedNotesList);
+      // show notification of success message
+      toast("Post saved successfully.");
+      // 8. update the notes in local storage
+      localStorage.setItem("noteslist", JSON.stringify(updatedNotesList));
+    }
+  };
 
   return (
     <>
@@ -43,17 +94,19 @@ function AddNewPage() {
             }}
           />
           <FormControl fullWidth sx={{ mt: "20px" }}>
-            <InputLabel id="note_category_label">Age</InputLabel>
+            <InputLabel id="note_category_label">Category</InputLabel>
             <Select
               labelId="note_category_label"
               id="note_category"
               label="Category"
-              value={category}
-              onChange={(event) => setCategory(event.target.value)}
+              onChange={(event) => {
+                setCategory(event.target.value);
+              }}
             >
-              <MenuItem value={"Personal"}>Personal</MenuItem>
-              <MenuItem value={"Work"}>Work</MenuItem>
-              <MenuItem value={"Ideas"}>Ideas</MenuItem>
+              {/* 5. load the categories using .map - value pass in as id (done) */}
+              {categories.map((category) => (
+                <MenuItem value={category.id}>{category.label}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <Box sx={{ mt: "20px" }}>
@@ -74,7 +127,7 @@ function AddNewPage() {
               mt: "20px",
             }}
           >
-            <Button color="primary" variant="contained">
+            <Button color="primary" variant="contained" onClick={handleAddNew}>
               Save Note
             </Button>
             <Button variant="outlined" component={RouterLink} to="/">

@@ -51,9 +51,9 @@ function EditNote() {
               value={category}
               onChange={(event) => setCategory(event.target.value)}
             >
-              <MenuItem value={"Personal"}>Personal</MenuItem>
-              <MenuItem value={"Work"}>Work</MenuItem>
-              <MenuItem value={"Ideas"}>Ideas</MenuItem>
+              <MenuItem value={"personal"}>Personal</MenuItem>
+              <MenuItem value={"work"}>Work</MenuItem>
+              <MenuItem value={"ideas"}>Ideas</MenuItem>
             </Select>
           </FormControl>
           <Box sx={{ mt: "20px" }}>

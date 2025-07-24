@@ -31,47 +31,51 @@ function HomePage() {
           sx={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <Typography variant="h3">All Notes (3)</Typography>
           <Box
             sx={{
               display: "flex",
+              alignItems: "center",
               gap: "10px",
             }}
           >
             <FormControl sx={{ minWidth: 120 }}>
               <InputLabel id="note_category_label">Category</InputLabel>
               <Select
+                defaultValue={"all"}
                 labelId="note_category_label"
                 id="note_category"
-                value={category}
                 label="Category"
+                // value={category}
                 onChange={(event) => setCategory(event.target.value)}
               >
-                <MenuItem value={"All Categories"}>All Categories</MenuItem>
-                <MenuItem value={"Personal"}>Personal</MenuItem>
-                <MenuItem value={"Work"}>Work</MenuItem>
-                <MenuItem value={"Ideas"}>Ideas</MenuItem>
+                <MenuItem value={"all"}>All Categories</MenuItem>
+                <MenuItem value={"personal"}>Personal</MenuItem>
+                <MenuItem value={"work"}>Work</MenuItem>
+                <MenuItem value={"ideas"}>Ideas</MenuItem>
               </Select>
             </FormControl>
             <FormControl sx={{ minWidth: 120 }}>
               <InputLabel id="sort_note_label">Sort by</InputLabel>
               <Select
+                defaultValue={"updated"}
                 labelId="sort_note_label"
                 id="sort_note"
-                value={sort}
                 label="sort"
+                // value={sort}
                 onChange={(event) => setSort(event.target.value)}
               >
-                <MenuItem value={"Last Updated"}>Last Updated</MenuItem>
-                <MenuItem value={"Title"}>Title</MenuItem>
+                <MenuItem value={"updated"}>Last Updated</MenuItem>
+                <MenuItem value={"title"}>Title</MenuItem>
               </Select>
             </FormControl>
           </Box>
         </Box>
         <Grid container spacing={3} sx={{ mt: "20px" }}>
-          <Grid size={4}>
+          <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4 }}>
             <Card>
               <CardContent>
                 <Typography>Which theme should we pick?</Typography>
@@ -95,7 +99,7 @@ function HomePage() {
               </CardActions>
             </Card>
           </Grid>
-          <Grid size={4}>
+          <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4 }}>
             <Card>
               <CardContent>
                 <Typography>Project Making Week</Typography>
@@ -119,7 +123,7 @@ function HomePage() {
               </CardActions>
             </Card>
           </Grid>
-          <Grid size={4}>
+          <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4 }}>
             <Card>
               <CardContent>
                 <Typography>Assignment Sheets</Typography>
