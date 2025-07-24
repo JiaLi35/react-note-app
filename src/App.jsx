@@ -23,7 +23,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/add" element={<AddNewPage />} />
         <Route path="/categories" element={<CategoriesPage />} />
-        <Route path="/edit/1" element={<EditNote />} />
+        <Route path="/edit/:id" element={<EditNote />} />
       </Routes>
       <Toaster position="bottom-right" />
     </Router>

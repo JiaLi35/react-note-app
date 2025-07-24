@@ -63,26 +63,35 @@ function CategoriesPage() {
   };
 
   // 5. function to update the category name
-  const handleUpdate = (id, label) => {
+  const handleUpdate = (category) => {
     // 5a. prompt the user to update the new label for the selected category (pass in the current value)
     const newCategoryName = prompt(
       "Please enter the new name for the category",
-      label
+      category.label
     );
 
     if (newCategoryName) {
-      const updatedCategory = categories.map((category) => {
-        // 5b. update the categories with the updated category label
-        if (category.id === id) {
-          category.label = newCategoryName; // update the value
-        }
-        return category;
-      });
-      setCategories(updatedCategory);
+      /* my way */
+      // const updatedCategory = categories.map((category) => {
+      //   // 5b. update the categories with the updated category label
+      //   if (category.id === id) {
+      //     category.label = newCategoryName; // update the value
+      //   }
+      //   return category;
+      // });
+      const updatedCategories = [...categories];
+      setCategories(
+        updatedCategories.map((cat) => {
+          if (cat.id === category.id) {
+            cat.label = newCategoryName;
+          }
+          return cat;
+        })
+      );
       // show notification of success message
       toast("Category has been successfully updated.");
       // 5c. update the local storage with the udpated categories
-      updatedLocalStorage(updatedCategory);
+      updatedLocalStorage(updatedCategories);
     }
   };
 
@@ -157,9 +166,7 @@ function CategoriesPage() {
                 divider
                 secondaryAction={
                   <Box sx={{ display: "flex", gap: "10px" }}>
-                    <IconButton
-                      onClick={() => handleUpdate(category.id, category.label)}
-                    >
+                    <IconButton onClick={() => handleUpdate(category)}>
                       <Edit />
                     </IconButton>
                     <IconButton onClick={() => handleDelete(category.id)}>

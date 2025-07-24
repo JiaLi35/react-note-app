@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link as RouterLink } from "react-router";
+import { Link as RouterLink, useNavigate } from "react-router";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import FormControl from "@mui/material/FormControl";
@@ -26,7 +26,7 @@ function AddNewPage() {
   /*
     rule for form fields state: one state for one field
   */
-
+  const navigate = useNavigate();
   // 1. load the categories data from local storage
   const dataInLocalStorage = localStorage.getItem("categorieslist");
   // 2. create a state to store the categories data from local storage
@@ -35,14 +35,13 @@ function AddNewPage() {
   );
   // 3. load the notes data from local storage
   const notesLocalStorage = localStorage.getItem("noteslist");
-  console.log(notesLocalStorage);
   // 4. create a state to store the notes data from local storage
   const [notes, setNotes] = useState(
     notesLocalStorage ? JSON.parse(notesLocalStorage) : []
   );
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [content, setContent] = useState("Welcome to <b>Forward College</b>");
+  const [content, setContent] = useState("");
 
   const handleAddNew = () => {
     // 6. check for error - make sure all the fields are filled up
@@ -57,6 +56,7 @@ function AddNewPage() {
           title: title,
           category: category,
           content: content,
+          updatedAt: new Date().valueOf(), // timestamp - seconds count since 1970 jan 1
         },
       ];
       setNotes(updatedNotesList);
@@ -64,6 +64,10 @@ function AddNewPage() {
       toast("Post saved successfully.");
       // 8. update the notes in local storage
       localStorage.setItem("noteslist", JSON.stringify(updatedNotesList));
+      // 9. show success message
+      toast("New note added");
+      // 10. redirect back to home page
+      navigate("/");
     }
   };
 
@@ -105,7 +109,9 @@ function AddNewPage() {
             >
               {/* 5. load the categories using .map - value pass in as id (done) */}
               {categories.map((category) => (
-                <MenuItem value={category.id}>{category.label}</MenuItem>
+                <MenuItem key={category.id} value={category.id}>
+                  {category.label}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
